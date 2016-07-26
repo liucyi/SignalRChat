@@ -39,5 +39,9 @@ namespace WebApp.Controllers
             ViewBag.OnLineUsers = onLineUserList;
             return View();
         }
+         public ActionResult Connection()
+        {
+            return View();
+        }
     }
 }
