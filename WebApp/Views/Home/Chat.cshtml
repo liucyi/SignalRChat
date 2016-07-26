@@ -22,10 +22,10 @@
             // 建立对应server端Hub class的对象，请注意ChatHub(Hubs文件夹下的类名)的第一个字母要改成小写
             var chat = $.connection.chatHub;
             // 定义client端的javascript function，供server端hub，通过dynamic的方式，调用所有Clients的javascript function
-            chat.client.addNewMessageToPage = function (name, message) { //这里的fuction(name,message)=>ChatHub.cs 中的Send(string name, string message)
+            chat.client.addNewMessageToPage = function (name, message, time) { //这里的fuction(name,message)=>ChatHub.cs 中的Send(string name, string message)
                 //当server端调用sendMessage时，将server push的message数据，呈现在wholeMessage中
                 $('#discussion').append('<li><strong>' + htmlEncode(name)
-                    + '</strong>: ' + htmlEncode(message) + '</li>');
+                    + '</strong>: ' + time + htmlEncode(message) + '</li>');
             };
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(prompt('Enter your name:', ''));
@@ -33,6 +33,7 @@
             $('#message').focus();
             //把connection打开
             $.connection.hub.start().done(function () {
+           
                 $('#sendmessage').click(function () {
                     //调用叫server端的Hub对象，将#message数据传给server
                     chat.server.send($('#displayname').val(), $('#message').val());
