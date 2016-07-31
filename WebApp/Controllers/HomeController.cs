@@ -43,5 +43,9 @@ namespace WebApp.Controllers
         {
             return View();
         }
+           public ActionResult Progress()
+        {
+            return View();
+        }
     }
 }
